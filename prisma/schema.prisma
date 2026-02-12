@@ -1,0 +1,126 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Hospital model - represents medical institutions
+model Hospital {
+  id              String   @id @default(cuid())
+  name            String
+  email           String   @unique
+  passwordHash    String
+  address         String
+  country         String
+  phone           String
+  contactPerson   String
+  licenseNumber   String   @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relations
+  listings            Listing[]
+  reservationsBuyer   Reservation[] @relation("BuyerReservations")
+  reservationsSeller  Reservation[] @relation("SellerReservations")
+  uploadBatches       UploadBatch[]
+  
+  @@map("hospitals")
+}
+
+// Product model - represents medical supplies
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  gtin        String   @unique
+  description String?
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  listings Listing[]
+  
+  @@map("products")
+}
+
+// Listing model - represents available inventory for sale
+model Listing {
+  id           String   @id @default(cuid())
+  quantity     Int
+  pricePerUnit Float
+  expiryDate  DateTime?
+  status       String   @default("available")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  // Relations
+  hospitalId String
+  hospital   Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  
+  productId  String
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  reservations Reservation[]
+  
+  // Indexes for performance
+  @@index([hospitalId])
+  @@index([productId])
+  @@index([status])
+  @@index([expiryDate])
+  
+  @@map("listings")
+}
+
+// Reservation model - represents purchase reservations
+model Reservation {
+  id        String   @id @default(cuid())
+  quantity  Int
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  listingId String
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  buyerId   String
+  buyer     Hospital @relation("BuyerReservations", fields: [buyerId], references: [id], onDelete: Cascade)
+
+  sellerId  String
+  seller    Hospital @relation("SellerReservations", fields: [sellerId], references: [id], onDelete: Cascade)
+
+  // Indexes for performance
+  @@index([listingId])
+  @@index([buyerId])
+  @@index([sellerId])
+  @@index([status])
+  
+  @@map("reservations")
+}
+
+// UploadBatch model - tracks bulk Excel uploads
+model UploadBatch {
+  id            String   @id @default(cuid())
+  filename      String
+  uploadDate    DateTime @default(now())
+  rowsProcessed Int
+  rowsSuccess   Int
+  rowsFailed    Int
+  errorLog      String?  @db.Text
+  
+  // Relations
+  hospitalId String
+  hospital   Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  
+  // Indexes for performance
+  @@index([hospitalId])
+  @@index([uploadDate])
+  
+  @@map("upload_batches")
+}
