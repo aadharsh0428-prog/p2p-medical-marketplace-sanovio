@@ -56,8 +56,6 @@ Upload your inventory effortlessly:
 - **Review Before Publishing**: All uploads go to "Under Review" status first
 - **Bulk Processing**: Upload hundreds of products at once
 
-![Dashboard Screenshot](./ui_frontend_after_upload.png)
-
 ### 🔍 **Intelligent Search**
 Find products using advanced search:
 - **Fuzzy Matching**: Find "surgicle gloves" even if you type "surgical glove" (handles typos)
@@ -82,6 +80,8 @@ Control what gets published:
 2. Review products in dashboard
 3. Click "Activate" to make them searchable
 4. Or delete if not needed
+
+![Dashboard Screenshot](./ui_frontend_after_upload.png)
 
 ### 🛒 **Secure Checkout**
 Complete transactions safely:
