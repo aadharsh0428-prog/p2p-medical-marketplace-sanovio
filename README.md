@@ -72,7 +72,7 @@ Get personalized suggestions:
 - **Category Matching**: Suggests products in categories you frequently purchase
 - **No External APIs**: All AI runs locally (100% free, no data leaves your server)
 
-![Dashboard Screenshot](./ui_frontend_recommendation)
+![Dashboard Screenshot](./ui_frontend_recommendation.png)
 
 ### ✅ **Review & Approval Workflow**
 Control what gets published:
