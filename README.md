@@ -1,72 +1,115 @@
-# P2P Medical Supplies Marketplace
+# 🏥 P2P Medical Supplies Marketplace
 
-A peer-to-peer marketplace for hospitals to trade surplus medical supplies with AI-powered product mapping.
+> A modern peer-to-peer platform where hospitals can safely trade surplus medical supplies with AI-powered intelligent recommendations.
 
-## Architecture
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-**Backend:** Node.js + TypeScript + Express + Prisma + PostgreSQL
-**Frontend:** React + TypeScript + Vite
+---
 
-## Quick Start
+## 📋 Table of Contents
 
-### Backend
-```bash
-npm install
-cp .env.example .env
-# Edit .env with your DATABASE_URL
-npx prisma migrate dev --name init
-npx prisma generate
-npm run seed
-npm run dev  # Port 3001
-```
+- [What This Application Does](#-what-this-application-does)
+- [Key Features](#-key-features)
+- [Quick Start](#-quick-start)
+- [How It Works](#-how-it-works)
+- [Technical Architecture](#-technical-architecture)
+- [API Documentation](#-api-documentation)
+- [Smart Features](#-smart-features)
+- [Contributing](#-contributing)
 
-### Frontend
-```bash
-cd frontend
-npm install
-npm run dev  # Port 3000
-```
+---
 
-## Features
+## 🎯 What This Application Does
 
-✅ Excel/CSV upload with field validation
-✅ Hybrid AI + deterministic product mapping
-✅ Transactional anti-oversell reservation logic
-✅ Semantic search with relevance ranking
-✅ Complete marketplace workflow (upload → map → list → search → purchase)
+### For Non-Technical Users
 
-## Database Schema
+This is a **marketplace platform** specifically designed for hospitals to:
 
-- **RawProduct**: Original uploaded data (immutable)
-- **CanonicalProduct**: Standardized product catalog
-- **ProductMapping**: Links raw to canonical (with confidence scores)
-- **Listing**: Marketplace inventory
-- **Reservation**: Time-limited purchase holds
-- **Order**: Completed transactions
+1. **List surplus medical supplies** they no longer need
+2. **Search for supplies** other hospitals are selling
+3. **Complete purchases** securely and efficiently
+4. **Get smart recommendations** on what to buy based on their purchase history
 
-## API Endpoints
+**Think of it like:** Amazon or eBay, but exclusively for hospitals trading medical supplies with AI helping you find what you need.
 
-- POST /api/upload - Upload Excel file
-- GET /api/mapping/suggestions/:id - Get AI mapping suggestions
-- POST /api/listings - Create listing
-- POST /api/search - Semantic search
-- POST /api/reservations - Reserve inventory
-- POST /api/reservations/:id/checkout - Complete purchase
+---
 
-## Design Principles
+## ✨ Key Features
 
-1. AI assists, canonical data guarantees safety
-2. Deterministic rules (GTIN → SKU) before AI
-3. Serializable transactions prevent race conditions
-4. Original data never modified
+### 🏠 **Dashboard**
+Your command center where you can:
+- **View Statistics**: See total listings, active items, items under review, and expiring products
+- **Manage Inventory**: Activate or delete product listings
+- **Track Performance**: Monitor marketplace activity in real-time
+- **Get AI Recommendations**: See personalized product suggestions based on your browsing and purchase history
 
-## Tech Highlights
+### 📤 **Smart Upload System**
+Upload your inventory effortlessly:
+- **Excel/CSV Support**: Upload files with your product data
+- **Automatic Validation**: System checks for errors (missing prices, invalid dates, duplicates)
+- **Review Before Publishing**: All uploads go to "Under Review" status first
+- **Bulk Processing**: Upload hundreds of products at once
 
-- **Anti-oversell**: Row-level locking in transactions
-- **Semantic similarity**: Jaccard + Levenshtein (no external APIs)
-- **Confidence policy**: >90% auto-accept, 60-90% needs review
-- **Background jobs**: Auto-expire reservations (15 min timeout)
+### 🔍 **Intelligent Search**
+Find products using advanced search:
+- **Fuzzy Matching**: Find "surgicle gloves" even if you type "surgical glove" (handles typos)
+- **Semantic Search**: Understands context (searching "umbilical" shows neonatal supplies)
+- **Smart Ranking**: Most relevant results appear first
+- **Filter & Sort**: Narrow down by category, price, quantity
 
-## Sample Data
+### 🤖 **AI-Powered Recommendations**
+Get personalized suggestions:
+- **Purchase History Analysis**: Recommends products similar to what you've bought
+- **Behavioral Patterns**: Learns from your browsing habits
+- **Category Matching**: Suggests products in categories you frequently purchase
+- **No External APIs**: All AI runs locally (100% free, no data leaves your server)
 
-Includes seed script with 10 canonical products matching sample Excel data.
+### ✅ **Review & Approval Workflow**
+Control what gets published:
+1. Upload creates **DRAFT** listings
+2. Review products in dashboard
+3. Click "Activate" to make them searchable
+4. Or delete if not needed
+
+### 🛒 **Secure Checkout**
+Complete transactions safely:
+- **Time-Limited Reservations**: 15-minute holds prevent overselling
+- **Anti-Oversell Protection**: Database locks ensure inventory accuracy
+- **Order Tracking**: Monitor purchase status
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+Before you begin, ensure you have:
+- **Node.js** 18+ ([Download](https://nodejs.org/))
+- **PostgreSQL** 14+ ([Download](https://www.postgresql.org/download/))
+- **Git** ([Download](https://git-scm.com/))
+
+### Option 1: Using Docker (Recommended)
+
+**Start PostgreSQL database:**
+
+Create `docker-compose.yml` in project root:
+
+```yaml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: marketplace
+      POSTGRES_PASSWORD: marketplace123
+      POSTGRES_DB: p2p_marketplace
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
