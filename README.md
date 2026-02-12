@@ -46,12 +46,17 @@ Your command center where you can:
 - **Track Performance**: Monitor marketplace activity in real-time
 - **Get AI Recommendations**: See personalized product suggestions based on your browsing and purchase history
 
+![Dashboard Screenshot](./ui_frontend_login.png)
+![Dashboard Screenshot](./ui_frontend_dashboard_before_upload.png)
+
 ### 📤 **Smart Upload System**
 Upload your inventory effortlessly:
 - **Excel/CSV Support**: Upload files with your product data
 - **Automatic Validation**: System checks for errors (missing prices, invalid dates, duplicates)
 - **Review Before Publishing**: All uploads go to "Under Review" status first
 - **Bulk Processing**: Upload hundreds of products at once
+
+![Dashboard Screenshot](./ui_frontend_after_upload.png)
 
 ### 🔍 **Intelligent Search**
 Find products using advanced search:
@@ -60,12 +65,16 @@ Find products using advanced search:
 - **Smart Ranking**: Most relevant results appear first
 - **Filter & Sort**: Narrow down by category, price, quantity
 
+![Dashboard Screenshot](./ui_frontend_marketplace.png)
+
 ### 🤖 **AI-Powered Recommendations**
 Get personalized suggestions:
 - **Purchase History Analysis**: Recommends products similar to what you've bought
 - **Behavioral Patterns**: Learns from your browsing habits
 - **Category Matching**: Suggests products in categories you frequently purchase
 - **No External APIs**: All AI runs locally (100% free, no data leaves your server)
+
+![Dashboard Screenshot](./ui_frontend_recommendation)
 
 ### ✅ **Review & Approval Workflow**
 Control what gets published:
@@ -79,6 +88,8 @@ Complete transactions safely:
 - **Time-Limited Reservations**: 15-minute holds prevent overselling
 - **Anti-Oversell Protection**: Database locks ensure inventory accuracy
 - **Order Tracking**: Monitor purchase status
+
+![Dashboard Screenshot](ui_frontend_checkout.png)
 
 ---
 
