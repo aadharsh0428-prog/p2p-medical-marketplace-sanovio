@@ -153,10 +153,10 @@ CREATE DATABASE p2p_marketplace;
 git clone https://github.com/yourusername/p2p-medical-marketplace.git
 cd p2p-medical-marketplace
 
-# 2. Install backend dependencies
+# 2. Install backend dependencies(Terminal 1)
 npm install
 
-# 3. Install frontend dependencies
+# 3. Install frontend dependencies(Terminal 2)
 cd frontend
 npm install
 cd ..
