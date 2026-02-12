@@ -1,12 +1,3 @@
-I'll provide the complete README.md content that you can copy directly:
-
-***
-
-**Copy everything below this line and save as `README.md`:**
-
-***
-
-```markdown
 # 🏥 P2P Medical Supplies Marketplace
 
 > A modern peer-to-peer platform where hospitals can safely trade surplus medical supplies with AI-powered intelligent recommendations.
