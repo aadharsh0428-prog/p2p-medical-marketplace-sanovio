@@ -602,99 +602,6 @@ FRONTEND_URL=http://localhost:5173
 
 ---
 
-## 🐛 Troubleshooting
-
-### Database Connection Error
-
-```bash
-# Check if PostgreSQL is running
-# Docker:
-docker ps
-
-# Local:
-pg_isready
-
-# Test connection:
-psql postgresql://marketplace:marketplace123@localhost:5432/p2p_marketplace
-```
-
-### Migration Errors
-
-```bash
-# Reset database (WARNING: deletes all data)
-npx prisma migrate reset
-
-# Regenerate client
-npx prisma generate
-
-# Run migrations
-npx prisma migrate deploy
-```
-
-### Port Already in Use
-
-```bash
-# Find process on port 3001
-# Windows:
-netstat -ano | findstr :3001
-
-# Mac/Linux:
-lsof -i :3001
-
-# Kill the process
-# Windows:
-taskkill /PID <PID> /F
-
-# Mac/Linux:
-kill -9 <PID>
-```
-
----
-
-## 🧪 Testing
-
-```bash
-# Run backend tests
-npm test
-
-# Run frontend tests
-cd frontend
-npm test
-
-# Run end-to-end tests
-npm run test:e2e
-```
-
----
-
-## 📦 Deployment
-
-### Production Build
-
-```bash
-# Build frontend
-cd frontend
-npm run build
-
-# Build backend
-cd ..
-npm run build
-
-# Start production server
-npm start
-```
-
-### Docker Deployment
-
-```bash
-# Build Docker image
-docker build -t p2p-marketplace .
-
-# Run container
-docker run -p 3001:3001 --env-file .env p2p-marketplace
-```
-
----
 
 ## 🤝 Contributing
 
@@ -723,13 +630,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📞 Support
-
-**Issues?** Open a GitHub issue  
-**Questions?** Email: support@example.com  
-**Documentation:** [Wiki](https://github.com/yourusername/p2p-medical-marketplace/wiki)
-
----
 
 ## 🗺️ Roadmap
 
@@ -737,8 +637,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [ ] Real-time chat between hospitals
 - [ ] Advanced analytics dashboard
 - [ ] Integration with hospital ERP systems
-- [ ] Multi-language support
-- [ ] Blockchain-based transaction verification
+- [ ] Multi-language and LLM support
 
 ---
 
