@@ -150,8 +150,8 @@ CREATE DATABASE p2p_marketplace;
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/p2p-medical-marketplace-sanovio.git
-cd p2p-medical-marketplace-sanovio
+git clone https://github.com/yourusername/p2p-medical-marketplace-test.git
+cd p2p-medical-marketplace-test
 
 # 2. Install backend dependencies(Terminal 1)
 npm install
